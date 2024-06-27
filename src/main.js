@@ -1,7 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import routerV1 from './routes/v1/routes.js'
+import indexRouter from './routes/v1/index.js'
+import authRouter from './routes/v1/auth.js'
+import usersRouter from './routes/v1/users.js'
+import tasksRouter from './routes/v1/tasks.js'
 import { connectWithDb } from './db/db.js'
 import schema from './config/config.schema.js';
 import config from './config/config.service.js';
@@ -39,7 +42,10 @@ startServer();
 // Swagger documentation UI
 
 // API routes
-app.use('/api/v1', routerV1)
+app.use('/', indexRouter)
+app.use('/api/v1/auth/', authRouter)
+app.use('/api/v1/users/', usersRouter)
+app.use('/api/v1/tasks/', tasksRouter)
 
 // Gloabl error handler
 
